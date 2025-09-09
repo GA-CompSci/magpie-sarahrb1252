@@ -33,27 +33,27 @@ public class Magpie
 	{   //init resp0onse
 		String response = "";
 
-        // blank
+    //BLANK
         if (statement.trim().length()==0){
             response = "Please say something";
 		}
         
-		//negitive
+	//NEGITVIE
 		else if (findKeyword(statement, "no") >= 0)
 		{
 			response = "Why so negative?";
 		}
-       //family
-		else if (findKeyword(statement, "no") >= 0
-				|| findKeyword(statement, "no") >= 0
-				|| findKeyword(statement, "no") >= 0
-				|| findKeyword(statement, "no") >= 0)
+    //fAMILY
+		else if (findKeyword(statement, "mother") >= 0
+				|| findKeyword(statement, "father") >= 0
+				|| findKeyword(statement, "sister") >= 0
+				|| findKeyword(statement, "brother") >= 0)
 		{
 			response = "Tell me more about your family.";
           
 		}
-          //pets
-        else if findKeyword(statement, "dog") !=-1
+    //PETS
+        else if (findKeyword(statement, "dog") !=-1
 				|| findKeyword(statement, "cat") >= 0
 				|| findKeyword(statement, "fish") >= 0
 				|| findKeyword(statement, "igana") >= 0)
@@ -61,12 +61,32 @@ public class Magpie
 			response = "Tell me more about your pets.";
       
 		}
-           // teahcer
+    // TEACHER
         else if(findKeyword(statement, "Mr.A")!=-1)
         {
             response = "Sounds like he knows whats up";
         }
-     
+    // I LIKE SOMETHING	
+		else if(findKeyword(statement,"I like")>=0){
+			// IDENTIFY WHERE THE i LIKE IS	
+			int pos = findKeyword(statement, "I like ");
+			// CUT THE SUBSTRING OF THE THING THAT YOU  LIKE
+			String thing = statement.substring(pos+7).trim();
+
+			response = "Why do you like " + thing + "?";
+		}
+
+		//I WANT SOMETHING	
+		else if(findKeyword(statement,"I want")!=-1){
+			//locate the " i want phrase
+			int pos = findKeyword(statement, "I want");
+			// chop off the stuff after "i want"
+			String thing = statement.substring(pos+6).trim();
+
+			response = "Whould you really be happy if you had " + thing + "?";
+
+		}
+		//RANDOM
 		else
 		{
 			response = getRandomResponse();
